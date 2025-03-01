@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Item\ItemContoller;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+////////////// Home Page
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+
+///////////// Items Page
+Route::get('/admin/items/', [ItemContoller::class, 'index'])->name('add_item');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Item\ItemContoller;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -19,4 +20,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 ///////////// Items Page
-Route::get('/admin/items/', [ItemContoller::class, 'index'])->name('add_item');
+Route::get('/admin/items/', [ItemContoller::class, 'index'])->name('item_page');
+Route::post('/admin/items/', [ItemContoller::class, 'create'])->name('create_item');
+
+///////////// Categories Page
+Route::get('/admin/categories/',[CategoryController::class, 'index'])->name('category_page');
+Route::post('admin/categories/',[CategoryController::class, 'create'])->name('create_category');

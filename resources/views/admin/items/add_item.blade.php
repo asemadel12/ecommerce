@@ -43,7 +43,8 @@
                 <h4 class="mb-0">Add New Product</h4>
             </div>
             <div class="card-body">
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('create_item') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
                         <label for="productName" class="form-label">Product Name</label>
                         <input type="text" class="form-control" id="productName" name="product_name" placeholder="Enter product name" required>
@@ -72,7 +73,7 @@
 
                     <div class="mb-3">
                         <label for="productImage" class="form-label">Upload Image</label>
-                        <input type="file" class="form-control" id="productImage" name="image" accept="image/*" required>
+                        <input type="file" class="form-control" id="productImage" name="image" accept="image/*">
                     </div>
 
                     <div class="text-center">

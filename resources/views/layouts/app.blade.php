@@ -39,11 +39,14 @@
                                 <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ route('add_item') }}">Add Item</a>
+                                <a class="nav-link active" aria-current="page" href="{{ route('item_page') }}">Add Item</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ route('category_page') }}">Add Category</a>
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div>[]
             </nav>
         </nav>
     </header>

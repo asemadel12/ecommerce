@@ -54,10 +54,9 @@
                         <label for="category" class="form-label">Category</label>
                         <select class="form-select" id="category" name="category" required>
                             <option selected disabled>Select Category</option>
-                            <option value="Jacket">Jacket</option>
-                            <option value="Shirt">Shirt</option>
-                            <option value="Shoes">Shoes</option>
-                            <option value="Accessories">Accessories</option>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
                         </select>
                     </div>
 

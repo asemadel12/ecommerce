@@ -19,7 +19,7 @@ class ItemContoller extends Controller
     public function index()
     {
         $categories = $this->categoryService->getAllCategories();
-        return view('admin/items/add_item', compact('categories'));
+        return view('admin.items.add_item', compact('categories'));
     }
     public function create(Request $request)
     {

@@ -55,7 +55,7 @@ function deleteCategory(id) {
                 if (response.success) {
                     $("#delete-category-msg").removeClass('d-none');
                     $("#delete-category-msg").html(response.success);
-                    $("#table-category-row-"+id).remove();
+                    $("#table-category-row-" + id).remove();
                     setTimeout(() => {
                         $("#delete-category-msg").addClass('d-none');
                     }, 3500);

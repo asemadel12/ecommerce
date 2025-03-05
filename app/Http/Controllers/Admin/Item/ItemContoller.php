@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Item;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ItemRequest;
 use App\Services\CategoryService;
 use App\Services\ItemService;
 use Illuminate\Http\Request;
@@ -19,10 +20,15 @@ class ItemContoller extends Controller
     public function index()
     {
         $categories = $this->categoryService->getAllCategories();
-        return view('admin.items.add_item', compact('categories'));
+        $items = $this->itemService->getAllItems();
+        return view('admin.items.add_item', compact('categories', 'items'));
     }
-    public function create(Request $request)
+    public function create(ItemRequest $request)
     {
-        $this->itemService->create($request);
+        $item = $this->itemService->create($request);
+        if (!$item)
+            return redirect()->route('item_page')->with(['success' => "The item could not be added, something wrong"]);
+
+        return redirect()->route('item_page')->with(['success' => "The item added successfully !"]);
     }
 }

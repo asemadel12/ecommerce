@@ -24,5 +24,5 @@ Route::get('/admin/items/', [ItemContoller::class, 'index'])->name('item_page');
 Route::post('/admin/items/', [ItemContoller::class, 'create'])->name('create_item');
 
 ///////////// Categories Page
-Route::get('/admin/categories/',[CategoryController::class, 'index'])->name('category_page');
-Route::post('admin/categories/',[CategoryController::class, 'create'])->name('create_category');
+Route::get('/admin/categories/', [CategoryController::class, 'index'])->name('category_page');
+Route::post('admin/categories/', [CategoryController::class, 'create'])->name('create_category');

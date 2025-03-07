@@ -21,7 +21,7 @@
             <td>{{ $item->id }}</td>
             <td>{{ $item->name }}</td>
             <td>{{ $item->description }}</td>
-            <td>{{ $item->category_id }}</td>
+            <td>{{ $item->category_name }}</td>
             <td>{{ $item->quantity }}</td>
             <td>{{ $item->price }}</td>
             <td><img style="width: 100%; height: 90px; object-fit: contain;" src="{{ asset('storage/' . $item->image) }}" alt=""></td>

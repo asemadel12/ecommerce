@@ -38,6 +38,9 @@ class ItemService
     }
     public function getAllItems()
     {
-        return Item::orderBy('id', 'asc')->get();
+        return Item::join("categories", "categories.id", "=", "stocks.category_id")
+            ->select("stocks.*", "categories.name as category_name")
+            ->orderBy("stocks.id", "asc")
+            ->get();
     }
 }

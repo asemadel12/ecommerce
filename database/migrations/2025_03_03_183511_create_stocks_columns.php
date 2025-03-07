@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('stocks', function (Blueprint $table) {
+        Schema::table('items', function (Blueprint $table) {
             $table->string('name', 255)->after('id');
             $table->string('description', 255)->after('name');
             $table->foreignId('category_id')->constrained()->onDelete('restrict')->after('description');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stocks_columns');
+        Schema::dropIfExists('items_columns');
     }
 };

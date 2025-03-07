@@ -17,7 +17,7 @@ class ItemService
             DB::beginTransaction();
             $imagePath = null;
             if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('stocks', 'public'); // Store in storage/app/public/stocks
+                $imagePath = $request->file('image')->store('items', 'public'); // Store in storage/app/public/items
                 // php artisan storage:link
             }
             $item = Item::create([
@@ -38,9 +38,9 @@ class ItemService
     }
     public function getAllItems()
     {
-        return Item::join("categories", "categories.id", "=", "stocks.category_id")
-            ->select("stocks.*", "categories.name as category_name")
-            ->orderBy("stocks.id", "asc")
+        return Item::join("categories", "categories.id", "=", "items.category_id")
+            ->select("items.*", "categories.name as category_name")
+            ->orderBy("items.id", "asc")
             ->get();
     }
 }

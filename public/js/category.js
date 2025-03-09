@@ -53,7 +53,7 @@ function deleteCategory(id) {
             },
             success: function (response) {
                 if (response.success) {
-                    $("#delete-category-msg").removeClass('d-none');
+                    $("#delete-category-msg").removeClass('d-none alert-danger').addClass('alert-success');
                     $("#delete-category-msg").html(response.success);
                     $("#table-category-row-" + id).remove();
                     setTimeout(() => {
@@ -62,8 +62,9 @@ function deleteCategory(id) {
                 }
             },
             error: function (xhr) {
-                if (xhr.status == 404) {
-                    $("#edit-form-messages-container" + id).html(`<p>${errors}</p>`).removeClass('text-success').addClass('text-danger');
+                var errors = xhr.responseJSON.errors;
+                if (errors) {
+                    $("#delete-category-msg").html(`<p>${errors}</p>`).removeClass('text-success d-none alert-success').addClass('text-danger alert-danger');
                 }
             }
         });

@@ -36,6 +36,33 @@ class ItemService
             return false;
         }
     }
+    public function update($request, $item)
+    {
+        if (!$item)
+            return response()->json(['errors' => 'The item is not defiend'], 404);
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('items', 'public'); // Store in storage/app/public/items
+            // php artisan storage:link
+        }
+        try {
+            DB::beginTransaction();
+            $item->update([
+                'name' => $request->product_name,
+                'description' => $request->product_description,
+                'category_id' => $request->category,
+                'quantity' => $request->quantity,
+                'price' => $request->price,
+                'image' => $imagePath,
+            ]);
+            DB::commit();
+            return response()->json(['success' => 'Item updated successfully']);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Log::error('Error updating item: ' . $th->getMessage());
+            return response()->json(['errors' => 'Update failed. Please try again later.'], 500);
+        }
+    }
     public function getAllItems()
     {
         return Item::join("categories", "categories.id", "=", "items.category_id")

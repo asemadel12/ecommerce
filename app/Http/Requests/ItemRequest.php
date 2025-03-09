@@ -25,7 +25,8 @@ class ItemRequest extends FormRequest
     {
         return [
             'product_name' => 'max:255|string|required',
-            'product_description' => 'nullable|max:255|string',
+            'product_description' => 'required|max:255|string',
+            'category' => 'required',
             'quantity' => 'numeric',
             'price' => 'numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

@@ -24,4 +24,12 @@ class CategoryController extends Controller
     {
         return $this->categoryService->delete($category);
     }
+    public function getAllCategories()
+    {
+        $allCategories = $this->categoryService->getAllCategories();
+        return response()->json([
+            'success' => true,
+            'categories' => $allCategories
+        ], 200);
+    }
 }

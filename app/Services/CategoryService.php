@@ -44,15 +44,17 @@ class CategoryService
     {
         if (!$category)
             return response()->json(['errors' => 'Category not found'], 404);
+        if ($category->items()->exists())
+            return response()->json(['errors' => 'Cannot delete category. It has linked items.'], 400);
         try {
             DB::beginTransaction();
             $category->delete();
             DB::commit();
+            return response()->json(['success' => 'Category deleted successfully !']);
         } catch (\Throwable $th) {
             DB::rollBack();
             //throw $th;
         }
-        return response()->json(['success' => 'Category deleted successfully !']);
     }
     public function getAllCategories()
     {

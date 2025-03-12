@@ -3,14 +3,23 @@ function editCategory(id) {
         $("#edit-form-messages-container" + id).empty();
         let categoryId = id;
         let categoryName = $("#category_name_edit" + id).val();
+        let formData = new FormData($("#edit_form_category" + id)[0]);
+        formData.append("category_name", categoryName);
+        let imageFile = $("#edit_image" + id)[0].files[0];
+        if (imageFile) {
+            formData.append("image", imageFile);
+        }
+        formData.append("_method", "put");
+
         let apiUrl = "/api/admin/categories/" + categoryId;
         $.ajax({
             url: apiUrl,
-            type: "PUT",
-            data: JSON.stringify({ category_name: categoryName }),
-            contentType: "application/json",
+            type: "POST", // Laravel will recognize it as PUT due to _method
+            data: formData,
+            contentType: false, // Must be false for FormData
+            processData: false, // Prevent jQuery from processing FormData
             headers: {
-                "X-CSRF-TOKEN": $("input[name='__token']").attr("content")
+                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content") // Correct CSRF token
             },
             success: function (response) {
                 if (response.success) {

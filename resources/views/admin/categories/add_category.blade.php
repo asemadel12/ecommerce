@@ -21,12 +21,16 @@
     @endif
     <h2 class="text-center mb-4">Add Category</h2>
 
-    <form action="{{ route('create_category') }}" method="POST">
+    <form action="{{ route('create_category') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="category_name" class="form-label">Category Name</label>
             <input type="text" class="form-control"
                 id="category_name" name="category_name" value="{{ old('category_name') }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Category Image</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*">
         </div>
 
         <div class="text-center">
@@ -47,6 +51,7 @@
         <tr>
             <td>#</td>
             <td>Category Name</td>
+            <td>Category Image</td>
             <td>Action</td>
         </tr>
         @php $i = 0 @endphp
@@ -54,6 +59,7 @@
         <tr id="table-category-row-{{ $category->id }}">
             <td>{{ ++$i }}</td>
             <td id="table-category-name{{ $category->id }}">{{ $category->name }}</td>
+            <td id="table-category-image{{ $category->id }}"><img style="width: 100%; height: 90px; object-fit: contain;" src="{{ asset('storage/' . $category->image) }}" alt=""></td>
             <td>
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -76,7 +82,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="" method="POST">
+                        <form id="edit_form_category{{ $category->id }}" action="" method="POST">
                             @csrf
                             <div style="color: red;" id="edit-form-messages-container{{ $category->id }}">
                             </div>
@@ -84,6 +90,10 @@
                                 <label for="category_name_edit{{ $category->id }}" class="form-label">Category Name</label>
                                 <input type="text" class="form-control"
                                     id="category_name_edit{{ $category->id }}" name="category_name_edit{{ $category->id }}" value="{{ $category->name }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_image{{ $category->id }}" class="form-label">Upload Image</label>
+                                <input type="file" class="form-control" id="edit_image{{ $category->id }}" name="edit_image{{ $category->id }}" accept="image/*">
                             </div>
                         </form>
                     </div>

@@ -16,9 +16,15 @@ class CategoryService
 {
     public function create($request)
     {
+        $imagePath = '';
+        if ($request->hasFile('image'))
+            $imagePath = $request->file('image')->store('categories', 'public'); // Store in storage/app/public/categories
         try {
             DB::beginTransaction();
-            Category::create(['name' => $request->input('category_name')]);
+            Category::create([
+                'name' => $request->input('category_name'),
+                'image' => $imagePath
+            ]);
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -29,10 +35,14 @@ class CategoryService
     {
         if (!$category)
             return response()->json(['errors' => 'Category not found'], 404);
+        $imagePath = '';
+        if ($request->hasFile('image'))
+            $imagePath = $request->file('image')->store('categories', 'public');
         try {
             DB::beginTransaction();
             $category->update([
-                'name' => $request->category_name
+                'name' => $request->category_name,
+                'image' => $imagePath
             ]);
             DB::commit();
         } catch (\Throwable $th) {

@@ -12,10 +12,10 @@ function updateItem(id) {
             formData.append("image", imageFile);
         }
 
-        formData.append("_method", "PUT"); // Laravel needs this to handle PUT requests
+        formData.append("_method", "PUT");
 
         $.ajax({
-            url: "/api/admin/items/" + id, // Correct the URL to match the route
+            url: "/api/admin/items/" + id, 
             type: "POST",
             data: formData,
             contentType: false,

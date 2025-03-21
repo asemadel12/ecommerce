@@ -27,6 +27,13 @@ class CategoryController extends Controller
     public function getAllCategories()
     {
         $allCategories = $this->categoryService->getAllCategories();
+
+        // Modify each category to include the full image URL
+        $allCategories = collect($allCategories)->map(function ($category) {
+            $category['image_url'] = asset('storage/' . $category['image']); // Generates full URL
+            return $category;
+        });
+        
         return response()->json([
             'success' => true,
             'categories' => $allCategories

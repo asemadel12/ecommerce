@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Item\ItemContoller;
 use App\Http\Controllers\Api\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Api\Admin\ItemController;
 use Illuminate\Http\Request;
@@ -26,3 +27,4 @@ Route::get('/admin/categories/', [AdminCategoryController::class, 'getAllCategor
 
 ////// items
 Route::match(['post', 'put'], '/admin/items/{item}', [ItemController::class, 'update']);
+Route::get('/admin/items/', [ItemController::class, 'getAllItems']);

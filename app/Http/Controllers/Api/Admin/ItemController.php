@@ -19,4 +19,18 @@ class ItemController extends Controller
     {
         return $this->itemService->update($request, $item);
     }
+    public function getAllItems()
+    {
+        $allItems = $this->itemService->getAllItems();
+
+        // Modify each item to include the full image URL
+        $allItems = collect($allItems)->map(function ($item) {
+            $item['image_url'] = asset('storage/' . $item['image']); // Generates full URL
+            return $item;
+        });
+        return response()->json([
+            'success' => true,
+            'items' => $allItems
+        ], 200);
+    }
 }
